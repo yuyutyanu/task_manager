@@ -1,0 +1,18 @@
+/*
+$('').click(function(){
+  socket.emit('',{});
+  $('').val("");
+});
+$('').click(function(){
+  socket.emit('',{});
+  $('').val("");
+});
+$('').click(function(){
+  socket.emit('',{});
+  $('').val("");
+});
+$('').click(function(){
+  socket.emit('',{});
+  $('').val("");
+});
+*/
