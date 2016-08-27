@@ -61,40 +61,52 @@ document.addEventListener("DOMContentLoaded", function() {
           problem_submit:function(index){
             console.log(this.list[index].problem_input);
             this.list[index].problem ='';
-            socket.emit('before_req',{before:this.list[index].before_input,id:index+1});
+            socket.emit('before_req',{before:this.list[index].before_input,id:index,name:'before'});
           },
           answer_submit:function(index){
             console.log(this.list[index].answer_input);
             this.list[index].problem ='';
-            socket.emit('before_req',{before:this.list[index].before_input,id:index+1});
+            socket.emit('after_req',{before:this.list[index].before_input,id:index,name:'after'});
           },
           before_submit:function(index){
             console.log(this.list[index].before_input);
             this.list[index].problem ='';
-            socket.emit('before_req',{before:this.list[index].before_input,id:index+1});
+            socket.emit('problem_req',{before:this.list[index].before_input,id:index,name:'problem'});
           },
           after_submit:function(index){
             console.log(this.list[index].after_input);
             this.list[index].problem ='';
-            socket.emit('before_req',{before:this.list[index].before_input,id:index+1});
+            socket.emit('answer_req',{before:this.list[index].before_input,id:index,name:'answer'});
           }
         }
     });
 });
 
 socket.on('new_text',function(data){
-  content.list[data.index]. hensu .push(data);
+  content.list[data.index].data.name .push(data);
 });
 
 //どうやって受け取ろう。。。
 (function() {
-    var socket = io.connect();
-    socket.on('old_text', function(data) {
-      for (var i = 0; i < db.length; i++) {
-        content.list[data.index].beforetext.push(data.before);
-        content.list[data.index].aftertext.push(data.after);
-        content.list[data.index].problem.push(data.problem);
-        content.list[data.index].answertext.push(data.answer);
+  
+    socket.on('old_before', function(data) {
+      for (var recode in data){
+        content.list[recode.index].beforetext.push(recode.before);
+        }
+    });
+    socket.on('old_after', function(data) {
+      for (var recode in data){
+        content.list[recode.index].aftertext.push(recode.after);
+        }
+    });
+    socket.on('old_problem', function(data) {
+      for (var recode in data){
+        content.list[recode.index].beforetext.push(recode.problem);
+        }
+    });
+    socket.on('old_answer', function(data) {
+      for (var recode in data){
+        content.list[recode.index].beforetext.push(recode.answer);
         }
     });
 }());
